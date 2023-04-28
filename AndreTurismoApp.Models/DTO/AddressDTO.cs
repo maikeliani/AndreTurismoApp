@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace AndreTurismoApp.Models.DTO
 {
-    internal class AddressDTO
+    public class AddressDTO
     {
         #region Propriedades
         public int Id { get; set; }

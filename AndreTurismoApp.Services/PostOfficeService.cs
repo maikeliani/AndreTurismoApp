@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using AndreTurismoApp.Models;
+using AndreTurismoApp.Models.DTO;
 
 namespace AndreTurismoApp.Services
 {

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.AddressService.Data;
 using AndreTurismoApp.Models;
+using AndreTurismoApp.Services;
+using AndreTurismoApp.Models.DTO;
+using Newtonsoft.Json;
 
 namespace AndreTurismoApp.AddressService.Controllers
 {
@@ -15,10 +18,19 @@ namespace AndreTurismoApp.AddressService.Controllers
     public class AddressesController : ControllerBase
     {
         private readonly AndreTurismoAppAddressServiceContext _context;
+        
 
         public AddressesController(AndreTurismoAppAddressServiceContext context)
         {
             _context = context;
+        }
+
+
+
+        [HttpGet("{cep:length(8)}")]
+        public ActionResult<AddressDTO> GetCEP(string cep)
+        {
+            return PostOfficesService.GetAddress(cep).Result;
         }
 
         // GET: api/Addresses
@@ -29,7 +41,9 @@ namespace AndreTurismoApp.AddressService.Controllers
           {
               return NotFound();
           }
-            return await _context.Address.ToListAsync();
+            
+            //return await _context.Address.ToListAsync(); //testeee
+            return await _context.Address.Include(a => a.City).ToListAsync();
         }
 
         // GET: api/Addresses/5
@@ -41,8 +55,7 @@ namespace AndreTurismoApp.AddressService.Controllers
               return NotFound();
           }
             //var address = await _context.Address.FindAsync(id);  testee
-            var address = await _context.Address.Include(a => a.City).Where(a => a.Id == id).FirstOrDefaultAsync();
-            //var addressModel = await _context.AddressModel.Include(a => a.Id_City_Address).Where(a => a.Id_City_Address.Id_City == id).FirstOrDefaultAsync();
+            var address = await _context.Address.Include(a => a.City).Where(a => a.Id == id).FirstOrDefaultAsync(); // inserido
             if (address == null)
             {
                 return NotFound();
@@ -91,7 +104,22 @@ namespace AndreTurismoApp.AddressService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppAddressServiceContext.Address'  is null.");
           }
-            _context.Address.Add(address);
+
+
+            var data = PostOfficesService.GetAddress(address.ZipCode).Result; // comando Result devolve um retrono do memso tipo do parametro Task, no caso AddresDTO
+            Address ad = new Address();
+            City city = new();
+
+            ad.Street = data.Logradouro;
+            city.Description = data.City;
+            city.Dt_Register = DateTime.Now;
+            ad.City = city;
+            ad.NeighborHood = data.Bairro;
+            ad.Complement = data.Complemento;
+            ad.ZipCode = data.CEP;
+                
+            
+            _context.Address.Add(ad);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAddress", new { id = address.Id }, address);
