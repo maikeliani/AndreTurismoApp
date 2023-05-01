@@ -27,28 +27,19 @@ namespace AndreTurismoApp.Controllers
         {
             return await _packageService.PostPackage(package);
         }
-      /*  [HttpPost(Name = "InsertPackage")]
-        public int Insert(Package package)
+
+        [HttpGet("{id}", Name = "BuscaPackagePorId")]
+        public async Task<Package> GetPackage(int id)
         {
-            return packageService.Insert(package);
-        }
-        [HttpGet(Name ="GellAllPackages")]
-        public List<Package> GetAll()
-        {
-            return packageService.GetAll();
+            return await _packageService.GetPackage(id);
         }
 
 
-        [HttpDelete(Name = "DeletePackage")]
-        public bool Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<Package> Delete(int id)
         {
-            return packageService.Delete(id);
+            return await _packageService.Delete(id);
         }
-        [HttpPut(Name = "UpdatePackage")]
-        public bool Update(Package package)
-        {
-            return packageService.Update(package);
-        }*/
 
     }
 }

@@ -40,5 +40,43 @@ namespace AndreTurismoApp.Services
                 return null;
             }
         }
+
+        public async Task<Package> GetPackage(int id)
+        {
+            try
+            {
+                List<Package> list = new List<Package>();
+                HttpResponseMessage response = await PackageService._httpClient.GetAsync("https://localhost:7234/api/Packages");
+                response.EnsureSuccessStatusCode();
+                string packages = await response.Content.ReadAsStringAsync();
+                list = JsonConvert.DeserializeObject<List<Package>>(packages).ToList();
+                if (list != null)
+                    return list.Where(a => a.Id == id).First();
+
+
+                else
+                    return null;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Package> Delete(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await PackageService._httpClient.DeleteAsync("https://localhost:7234/api/Packages" + $"/{id}");
+                response.EnsureSuccessStatusCode();
+                string packages = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Package>(packages); //deleta mas da erro no retorno pois o objeto ja foi deletado
+
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
     }
 }

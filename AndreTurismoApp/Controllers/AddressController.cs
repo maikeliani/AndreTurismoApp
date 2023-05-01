@@ -34,35 +34,47 @@ namespace AndreTurismoApp.Controllers
         {
             return await addressService.GetAddress(id);
         }
-/*
-        [HttpPost(Name = "InsertAddress")]
-        public int Insert(Address address)
+
+        [HttpPut("{id}")]
+        public async Task<Address> PutAddress(Address c)
         {
-            var idCity = cityService.Insert(address.City);
-            address.City = new City()
-            {
-                Id = idCity
-            };
-            return addressService.Insert(address);
+            return await  addressService.PutAddress(c);
         }
 
-        [HttpGet(Name = "GetAllAddress")]
-        public List<Address> GetAll()
+        [HttpDelete("{id}")]
+        public async Task<Address> Delete(int id)
         {
-            return addressService.GetAll();
+            return await addressService.Delete(id);
         }
+        /*
+                [HttpPost(Name = "InsertAddress")]
+                public int Insert(Address address)
+                {
+                    var idCity = cityService.Insert(address.City);
+                    address.City = new City()
+                    {
+                        Id = idCity
+                    };
+                    return addressService.Insert(address);
+                }
 
-        [HttpDelete(Name = "DeleteAddress")]
-        public bool Delete(int id)
-        {
-            return addressService.Delete(id);
-        }
+                [HttpGet(Name = "GetAllAddress")]
+                public List<Address> GetAll()
+                {
+                    return addressService.GetAll();
+                }
 
-        [HttpPut(Name = "UpdateAddress")]
-        public bool UpDate(Address address)
-        {
-            return addressService.UpDate(address);
-        }*/
+                [HttpDelete(Name = "DeleteAddress")]
+                public bool Delete(int id)
+                {
+                    return addressService.Delete(id);
+                }
+
+                [HttpPut(Name = "UpdateAddress")]
+                public bool UpDate(Address address)
+                {
+                    return addressService.UpDate(address);
+                }*/
     }
 }
     

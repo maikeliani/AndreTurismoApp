@@ -27,27 +27,20 @@ namespace AndreTurismoApp.Controllers
             return await _clientService.PostClient( client);
 
         }
-/*
-        [HttpPost(Name = "InsertClient")]
-        public int Insert(Client client)
+
+
+        [HttpGet("{id}", Name = "BuscarClientPorId")]
+        public async Task<Client> GetClient(int id)
         {
-            return clientService.Insert(client);
-        }
-        [HttpGet(Name = "GetAllClients")]
-        public List<Client> GetAll()
-        {
-            return clientService.GetAll();
+            return await _clientService.GetClient( id);
         }
 
-        [HttpDelete(Name = "DeleteClient")]
-        public bool Delete(int id)
+
+        [HttpDelete("{id}")]
+        public async Task<Client> Delete(int id)
         {
-            return clientService.Delete(id);
+            return await _clientService.Delete(id);
         }
-        [HttpPut(Name = "UpdateClient")]
-        public bool Update(Client client)
-        {
-            return clientService.Update(client);
-        }*/
+       
     }
 }

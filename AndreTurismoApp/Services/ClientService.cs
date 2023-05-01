@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using AndreTurismoApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace AndreTurismoApp.Services
@@ -38,6 +40,44 @@ namespace AndreTurismoApp.Services
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public async Task<Client> GetClient(int id)
+        {
+            try
+            {
+                List<Client> list = new List<Client>();
+                HttpResponseMessage response = await ClientService._httpClient.GetAsync("https://localhost:7021/api/Clients");
+                response.EnsureSuccessStatusCode();
+                string clients = await response.Content.ReadAsStringAsync();
+                list = JsonConvert.DeserializeObject<List<Client>>(clients).ToList();
+                if (list != null)
+                    return list.Where(a => a.Id == id).First();
+
+
+                else
+                    return null;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Client> Delete(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await ClientService._httpClient.DeleteAsync("https://localhost:7021/api/Clients" + $"/{id}");
+                response.EnsureSuccessStatusCode();
+                string clients = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Client>(clients); //deleta mas da erro no retorno pois o objeto ja foi deletado
+
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
             }
         }
     }

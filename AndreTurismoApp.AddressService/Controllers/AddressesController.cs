@@ -10,6 +10,7 @@ using AndreTurismoApp.Models;
 using AndreTurismoApp.Services;
 using AndreTurismoApp.Models.DTO;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace AndreTurismoApp.AddressService.Controllers
 {
@@ -119,28 +120,13 @@ namespace AndreTurismoApp.AddressService.Controllers
             ad.Number = address.Number;
             ad.NeighborHood = data.Bairro;
             ad.Complement = data.Complemento;
-            ad.ZipCode = data.CEP;
-            //----------------------------teste
-
-
-          // var existsCity =  _context.City?.Any(e => e.Description == data.City);
-           // if((bool)existsCity)
-           // {
-                // _context.City?.g(e => e.Id).Where(e => e.);
-                //var x = _context.City?.Select(e => e.Id);
-                
-               // var c = await _context.City.Select(cit => cit.Id).Where(cit =>cit.Description);
-                // var address = await _context.Address.Include(a => a.City).Where(a => a.Id == id).FirstOrDefaultAsync(); // inserido
-
-            //}
-
-            //---------------------------fecha teste
+            ad.ZipCode = data.CEP;         
 
 
             _context.Address.Add(ad);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAddress", new { id = address.Id }, address);
+            return CreatedAtAction("GetAddress", new { id = address.Id }, ad); // colocou ad no fim em vez de address
         }
 
         // DELETE: api/Addresses/5

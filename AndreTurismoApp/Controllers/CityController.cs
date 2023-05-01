@@ -30,6 +30,19 @@ namespace AndreTurismoApp.Controllers
             return await _cityService.PostCity(city);
         }
 
+        [HttpGet("{id}", Name = "BuscaCityPorId")]
+        public async Task<City> GetCity(int id)
+        {
+            return await _cityService.GetCity(id);
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<City> Delete(int id)
+        {
+            return await _cityService.Delete(id);
+        }
+
         /*  [HttpDelete(Name = "DeleteCity")]
           public bool Delete(int id)
           {

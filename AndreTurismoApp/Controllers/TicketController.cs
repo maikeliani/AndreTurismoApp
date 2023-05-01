@@ -26,30 +26,19 @@ namespace AndreTurismoApp.Controllers
         {
             return await _ticketService.PostTicket(ticket);
         }
-/*
-        [HttpPost(Name = "InsertTicket")]
-        public int Insert(Ticket ticket)
-        {
-            return ticketService.Insert(ticket);
-        }
 
-        [HttpGet(Name = "GetAllTickets")]
-        public List<Ticket> GetAll()
+        [HttpGet("{id}", Name = "BuscaTicketPorId")]
+        public async Task<Ticket> GetTicket(int id)
         {
-            return ticketService.GetAll();
+            return await _ticketService.GetTicket(id);
         }
 
 
-        [HttpDelete(Name = "DeleteTicket")]
-        public bool Delete(int id)
-        {
-            return ticketService.Delete(id);
-        }
 
-        [HttpPut(Name = "UpdateTicket")]
-        public bool UpDate(Ticket ticket)
+        [HttpDelete("{id}")]
+        public async Task<Ticket> Delete(int id)
         {
-            return ticketService.UpDate(ticket);
-        }*/
+            return await _ticketService.Delete(id);
+        }
     }
 }

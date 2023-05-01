@@ -41,5 +41,43 @@ namespace AndreTurismoApp.Services
             }
         }
 
+        public async Task<Hotel> GetHotel(int id)
+        {
+            try
+            {
+                List<Hotel> list = new List<Hotel>();
+                HttpResponseMessage response = await HotelService._httpClient.GetAsync("https://localhost:7261/api/Hotels");
+                response.EnsureSuccessStatusCode();
+                string hotels = await response.Content.ReadAsStringAsync();
+                list = JsonConvert.DeserializeObject<List<Hotel>>(hotels).ToList();
+                if (list != null)
+                    return list.Where(a => a.Id == id).First();
+
+
+                else
+                    return null;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Hotel> Delete(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await HotelService._httpClient.DeleteAsync("https://localhost:7261/api/Hotels" + $"/{id}");
+                response.EnsureSuccessStatusCode();
+                string hotels = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Hotel>(hotels); //deleta mas da erro no retorno pois o objeto ja foi deletado
+
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
     }
 }

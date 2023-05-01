@@ -27,17 +27,17 @@ namespace AndreTurismoApp.Controllers
         {
             return   _hotelService.GetHotels().Result;
         }
-/*
-        [HttpDelete(Name = "DeleteHotel")]
-        public bool Delete(int id)
+
+        [HttpGet("{id}", Name = "BuscarHotelPorId")]
+        public async Task<Hotel> GetHotel(int id)
         {
-            return hotelService.Delete(id);
+            return await _hotelService.GetHotel(id);
         }
 
-        [HttpPut(Name ="UpdateHotel")]
-        public bool Update(Hotel hotel)
+        [HttpDelete("{id}")]
+        public async Task<Hotel> Delete(int id)
         {
-            return hotelService.Update(hotel);
-        }*/
+            return await _hotelService.Delete(id);
+        }
     }
 }
