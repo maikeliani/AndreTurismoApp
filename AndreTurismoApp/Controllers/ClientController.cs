@@ -9,12 +9,25 @@ namespace AndreTurismoApp.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private ClientService clientService;
+        private ClientService _clientService;
         public ClientController()
         {
-            clientService = new ClientService();
+            _clientService = new ClientService();
         }
 
+        [HttpGet(Name = "GetAllClients")]
+        public async Task<List<Client>> GetAll()
+        {
+            return await _clientService.GetClients();
+        }
+
+        [HttpPost(Name ="PostClient")]
+        public async Task<Client>PostClient(Client client)
+        {
+            return await _clientService.PostClient( client);
+
+        }
+/*
         [HttpPost(Name = "InsertClient")]
         public int Insert(Client client)
         {
@@ -35,6 +48,6 @@ namespace AndreTurismoApp.Controllers
         public bool Update(Client client)
         {
             return clientService.Update(client);
-        }
+        }*/
     }
 }

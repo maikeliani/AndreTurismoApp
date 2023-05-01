@@ -9,34 +9,37 @@ namespace AndreTurismoApp.Controllers
     [ApiController]
     public class CityController : ControllerBase
     {
-        private CityService cityService;
+        private CityService _cityService;
+
         public CityController()
         {
-            cityService = new CityService();
+            _cityService = new CityService();
         }
 
-        [HttpPost(Name = "InsertCity")]
-        public int Insert(City city)
-        {
-            return cityService.Insert(city);
-        }
 
         [HttpGet(Name = "GetAllCities")]
-        public List<City> GetAll()
+        public  async Task<List<City>>GetAll()
         {
-            return cityService.GetAll();
+            return  await _cityService.GetCities();
         }
 
-        [HttpDelete(Name = "DeleteCity")]
-        public bool Delete(int id)
+
+        [HttpPost(Name ="PostCity")]
+        public async Task<City> PostCity(City city)
         {
-            return cityService.Delete(id);
+            return await _cityService.PostCity(city);
         }
 
-        [HttpPut(Name = "UpdateCity")]
-        public bool Update(City city)
-        {
-            return cityService.Update(city);
-        }
+        /*  [HttpDelete(Name = "DeleteCity")]
+          public bool Delete(int id)
+          {
+              return cityService.Delete(id);
+          }
+
+          [HttpPut(Name = "UpdateCity")]
+          public bool Update(City city)
+          {
+              return cityService.Update(city);
+          }*/
     }
 }

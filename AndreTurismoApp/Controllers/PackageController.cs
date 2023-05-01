@@ -9,12 +9,18 @@ namespace AndreTurismoApp.Controllers
     [ApiController]
     public class PackageController : ControllerBase
     {
-        private PackageService packageService;
+        private PackageService _packageService;
         public PackageController()
         {
-            packageService = new PackageService();
+            _packageService = new PackageService();
         }
-        [HttpPost(Name = "InsertPackage")]
+
+        [HttpGet]
+        public async Task<List<Package>>GetPackages()
+        {
+            return await _packageService.GetPackages();
+        }
+      /*  [HttpPost(Name = "InsertPackage")]
         public int Insert(Package package)
         {
             return packageService.Insert(package);
@@ -35,7 +41,7 @@ namespace AndreTurismoApp.Controllers
         public bool Update(Package package)
         {
             return packageService.Update(package);
-        }
+        }*/
 
     }
 }

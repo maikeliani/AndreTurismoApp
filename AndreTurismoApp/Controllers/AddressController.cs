@@ -17,6 +17,18 @@ namespace AndreTurismoApp.Controllers
             cityService = new CityService();
         }
 
+        [HttpGet(Name = "GetAddresses")]
+        public async Task<List<Address>> GetAddresses()
+        {
+            return await addressService.GetAddresses();
+        }
+
+        [HttpPost(Name = "PostAddresses")]
+        public async Task<Address> PostAddress(Address address)
+        {
+            return await addressService.PostAddresses(address);
+        }
+/*
         [HttpPost(Name = "InsertAddress")]
         public int Insert(Address address)
         {
@@ -44,7 +56,7 @@ namespace AndreTurismoApp.Controllers
         public bool UpDate(Address address)
         {
             return addressService.UpDate(address);
-        }
+        }*/
     }
 }
     

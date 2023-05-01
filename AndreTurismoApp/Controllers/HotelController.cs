@@ -14,19 +14,19 @@ namespace AndreTurismoApp.Controllers
         {
             hotelService = new HotelService();
         }
-
+/*
         [HttpPost(Name = "InsertHotel")]
         public int Insert(Hotel hotel)
         {
             return hotelService.Insert(hotel);
-        }
+        }*/
 
-        [HttpGet(Name = "GetAllHotels")]
-        public List<Hotel> GetAll()
+        [HttpGet]
+        public   ActionResult <List<Hotel>> GetHotels()
         {
-            return hotelService.GetAll();
+            return   hotelService.GetHotels().Result;
         }
-
+/*
         [HttpDelete(Name = "DeleteHotel")]
         public bool Delete(int id)
         {
@@ -37,6 +37,6 @@ namespace AndreTurismoApp.Controllers
         public bool Update(Hotel hotel)
         {
             return hotelService.Update(hotel);
-        }
+        }*/
     }
 }

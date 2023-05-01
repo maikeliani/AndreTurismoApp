@@ -9,12 +9,18 @@ namespace AndreTurismoApp.Controllers
     [ApiController]
     public class TicketController : ControllerBase
     {
-        private TicketService ticketService;
+        private TicketService _ticketService;
         public TicketController()
         {
-            ticketService = new TicketService();
+            _ticketService = new TicketService();
         }
 
+        [HttpGet]
+        public async Task<List<Ticket>> GetTickets()
+        {
+            return  await _ticketService.GetTickets();
+        }
+/*
         [HttpPost(Name = "InsertTicket")]
         public int Insert(Ticket ticket)
         {
@@ -38,6 +44,6 @@ namespace AndreTurismoApp.Controllers
         public bool UpDate(Ticket ticket)
         {
             return ticketService.UpDate(ticket);
-        }
+        }*/
     }
 }
