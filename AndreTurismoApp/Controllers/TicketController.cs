@@ -20,6 +20,12 @@ namespace AndreTurismoApp.Controllers
         {
             return  await _ticketService.GetTickets();
         }
+
+        [HttpPost(Name = "PostTicket")]
+        public async Task<Ticket>GetTickets(Ticket ticket)
+        {
+            return await _ticketService.PostTicket(ticket);
+        }
 /*
         [HttpPost(Name = "InsertTicket")]
         public int Insert(Ticket ticket)

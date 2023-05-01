@@ -9,22 +9,23 @@ namespace AndreTurismoApp.Controllers
     [ApiController]
     public class HotelController : ControllerBase
     {
-        private HotelService hotelService;
+        private HotelService _hotelService;
         public HotelController()
         {
-            hotelService = new HotelService();
+            _hotelService = new HotelService();
         }
-/*
-        [HttpPost(Name = "InsertHotel")]
-        public int Insert(Hotel hotel)
+
+        [HttpPost(Name = "PostHotel")]
+        public async Task<Hotel>PostHotel(Hotel hotel)
         {
-            return hotelService.Insert(hotel);
-        }*/
+            return await _hotelService.PostHotel(hotel);
+        }
+
 
         [HttpGet]
         public   ActionResult <List<Hotel>> GetHotels()
         {
-            return   hotelService.GetHotels().Result;
+            return   _hotelService.GetHotels().Result;
         }
 /*
         [HttpDelete(Name = "DeleteHotel")]

@@ -106,7 +106,7 @@ namespace AndreTurismoApp.AddressService.Controllers
           }
 
 
-            var data = PostOfficesService.GetAddress(address.ZipCode).Result; // comando Result devolve um retrono do memso tipo do parametro Task, no caso AddresDTO
+            var data = PostOfficesService.GetAddress(address.ZipCode).Result; // comando Result devolve um retorno do mesmo tipo do parametro Task, no caso AddresDTO
             Address ad = new Address();
             City city = new();
 
@@ -114,6 +114,7 @@ namespace AndreTurismoApp.AddressService.Controllers
             city.Description = data.City;
             city.Dt_Register = DateTime.Now;
             ad.City = city;
+            ad.Number = address.Number;
             ad.NeighborHood = data.Bairro;
             ad.Complement = data.Complemento;
             ad.ZipCode = data.CEP;

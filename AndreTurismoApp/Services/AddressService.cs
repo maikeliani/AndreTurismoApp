@@ -36,9 +36,9 @@ namespace AndreTurismoApp.Services
                 resposta.EnsureSuccessStatusCode();
                 return address;
             }
-            catch (Exception)
+            catch (HttpRequestException e)
             {
-                return null;
+                throw;
             }
         }
     }

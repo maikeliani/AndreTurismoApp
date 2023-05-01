@@ -20,6 +20,13 @@ namespace AndreTurismoApp.Controllers
         {
             return await _packageService.GetPackages();
         }
+
+
+        [HttpPost(Name ="PostPackage")]
+        public async Task<Package>PostPackage(Package package)
+        {
+            return await _packageService.PostPackage(package);
+        }
       /*  [HttpPost(Name = "InsertPackage")]
         public int Insert(Package package)
         {

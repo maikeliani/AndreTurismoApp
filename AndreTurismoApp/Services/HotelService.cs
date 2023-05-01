@@ -1,4 +1,5 @@
-﻿using AndreTurismoApp.Models;
+﻿using System.Text;
+using AndreTurismoApp.Models;
 using Newtonsoft.Json;
 
 namespace AndreTurismoApp.Services
@@ -22,5 +23,23 @@ namespace AndreTurismoApp.Services
                 return null;
             }
         }
+
+
+        public async Task<Hotel> PostHotel(Hotel hotel)
+        {
+            try
+            {
+                HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(hotel), Encoding.UTF8, "application/JSON");
+
+                HttpResponseMessage resposta = await _httpClient.PostAsync("https://localhost:7261/api/Hotels", httpContent);
+                resposta.EnsureSuccessStatusCode();
+                return hotel;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
     }
 }
