@@ -17,16 +17,22 @@ namespace AndreTurismoApp.Controllers
             cityService = new CityService();
         }
 
-        [HttpGet(Name = "GetAddresses")]
+        [HttpGet(Name = "GetAddress")]
         public async Task<List<Address>> GetAddresses()
         {
-            return await addressService.GetAddresses();
+            return await addressService.GetAddress();
         }
 
         [HttpPost(Name = "PostAddresses")]
         public async Task<Address> PostAddress(Address address)
         {
             return await addressService.PostAddresses(address);
+        }
+
+        [HttpGet("{id}", Name = "BuscarEndPorId")]
+        public async Task<Address> GetAddress(int id)
+        {
+            return await addressService.GetAddress(id);
         }
 /*
         [HttpPost(Name = "InsertAddress")]

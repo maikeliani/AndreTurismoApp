@@ -13,10 +13,12 @@ using Newtonsoft.Json;
 
 namespace AndreTurismoApp.AddressService.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AddressesController : ControllerBase
     {
+        
         private readonly AndreTurismoAppAddressServiceContext _context;
         
 
@@ -118,8 +120,23 @@ namespace AndreTurismoApp.AddressService.Controllers
             ad.NeighborHood = data.Bairro;
             ad.Complement = data.Complemento;
             ad.ZipCode = data.CEP;
+            //----------------------------teste
+
+
+          // var existsCity =  _context.City?.Any(e => e.Description == data.City);
+           // if((bool)existsCity)
+           // {
+                // _context.City?.g(e => e.Id).Where(e => e.);
+                //var x = _context.City?.Select(e => e.Id);
                 
-            
+               // var c = await _context.City.Select(cit => cit.Id).Where(cit =>cit.Description);
+                // var address = await _context.Address.Include(a => a.City).Where(a => a.Id == id).FirstOrDefaultAsync(); // inserido
+
+            //}
+
+            //---------------------------fecha teste
+
+
             _context.Address.Add(ad);
             await _context.SaveChangesAsync();
 
