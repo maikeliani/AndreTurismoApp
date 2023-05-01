@@ -27,9 +27,9 @@ namespace AndreTurismoApp.Services
                 resposta.EnsureSuccessStatusCode();
                 return ticket;
             }
-            catch (Exception)
+            catch (HttpRequestException e)
             {
-                return null;
+                throw;
             }
         }
 

@@ -18,9 +18,9 @@ namespace AndreTurismoApp.Services
                 return resultado;
 
             }
-            catch(Exception )
+            catch (HttpRequestException e)
             {
-                return null;
+                throw;
             }
         }
 

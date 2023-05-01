@@ -90,6 +90,17 @@ namespace AndreTurismoApp.CityServices.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppCityServicesContext.City'  is null.");
           }
+            //abre teste
+            // var cit = _context.City;
+          var existsCity =  _context.City?.Any(e => e.Description == city.Description );
+            if((bool)existsCity)
+            {
+                return Ok(city);
+                
+
+            }
+
+            //fecha testeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
             _context.City.Add(city);
             await _context.SaveChangesAsync();
 

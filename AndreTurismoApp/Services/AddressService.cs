@@ -17,9 +17,9 @@ namespace AndreTurismoApp.Services
                 string addresses = await response.Content.ReadAsStringAsync();
                 return  JsonConvert.DeserializeObject<List<Address>>(addresses);
             }
-            catch (Exception )
+            catch (HttpRequestException e)
             {
-                return null;
+                throw;
             }
 
 

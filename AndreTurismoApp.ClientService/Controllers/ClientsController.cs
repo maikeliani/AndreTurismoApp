@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.ClientService.Data;
+using AndreTurismoApp.Models.DTO;
 using AndreTurismoApp.Models;
+using System.Net;
+using AndreTurismoApp.Services;
 
 namespace AndreTurismoApp.ClientService.Controllers
 {
@@ -90,6 +93,24 @@ namespace AndreTurismoApp.ClientService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppClientServiceContext.Client'  is null.");
           }
+
+            //----------------------------teste
+
+                                                               //era address.ZipCode mudei pro teste                     
+            var data = PostOfficesService.GetAddress(client.Address.ZipCode).Result; // comando Result devolve um retorno do mesmo tipo do parametro Task, no caso AddresDTO
+            Address ad = new Address();
+            City city = new();
+
+            ad.Street = data.Logradouro;
+            city.Description = data.City;
+            city.Dt_Register = DateTime.Now;
+            ad.City = city;
+            ad.Number = client.Address.Number;
+            ad.NeighborHood = data.Bairro;
+            ad.Complement = data.Complemento;
+            ad.ZipCode = data.CEP;
+            client.Address = ad;
+            //---------------------------- fecha teste
             _context.Client.Add(client);
             await _context.SaveChangesAsync();
 

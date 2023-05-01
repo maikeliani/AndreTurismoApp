@@ -22,11 +22,11 @@ namespace AndreTurismoApp.Services
                 string city = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<City>>(city);
             }
-            catch(Exception) 
+            catch (HttpRequestException e)
             {
-                return null;
+                throw;
             }
-            
+
         }
 
         public async Task<City> PostCity(City city)
