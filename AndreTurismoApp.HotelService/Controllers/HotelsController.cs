@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.HotelService.Data;
 using AndreTurismoApp.Models;
+using AndreTurismoApp.Services;
 
 namespace AndreTurismoApp.HotelService.Controllers
 {
@@ -90,6 +91,21 @@ namespace AndreTurismoApp.HotelService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
           }
+
+            var data = PostOfficesService.GetAddress(hotel.Address.ZipCode).Result;
+            Address addressHotel = new Address();
+            City city = new();
+
+            addressHotel.Street = data.Logradouro;
+            city.Description = data.City;
+            city.Dt_Register = DateTime.Now;
+            addressHotel.City = city;
+            addressHotel.Number = hotel.Address.Number;
+            addressHotel.NeighborHood = data.Bairro;
+            addressHotel.Complement = data.Complemento;
+            addressHotel.ZipCode = data.CEP;
+            hotel.Address = addressHotel; 
+
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
 

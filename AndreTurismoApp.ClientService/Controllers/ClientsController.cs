@@ -95,12 +95,10 @@ namespace AndreTurismoApp.ClientService.Controllers
           if (_context.Client == null)
           {
               return Problem("Entity set 'AndreTurismoAppClientServiceContext.Client'  is null.");
-          }
+          }            
 
-            //----------------------------teste
-
-                                                               //era address.ZipCode mudei pro teste                     
-            var data = PostOfficesService.GetAddress(client.Address.ZipCode).Result; // comando Result devolve um retorno do mesmo tipo do parametro Task, no caso AddresDTO
+                                                                                   
+            var data = PostOfficesService.GetAddress(client.Address.ZipCode).Result; 
             Address ad = new Address();
             City city = new();
 
@@ -114,9 +112,9 @@ namespace AndreTurismoApp.ClientService.Controllers
             ad.ZipCode = data.CEP;
             client.Address = ad;
 
-            _context.Client.Include(a => a.Address); // inserido
+            _context.Client.Include(a => a.Address); 
 
-            //---------------------------- fecha teste
+            
             _context.Client.Add(client);
             await _context.SaveChangesAsync();
 
