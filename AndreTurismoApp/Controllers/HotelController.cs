@@ -39,5 +39,11 @@ namespace AndreTurismoApp.Controllers
         {
             return await _hotelService.Delete(id);
         }
+
+        [HttpPut("{id}")]
+        public async Task<Hotel> PutHotel(int id, Hotel hotel)
+        {
+            return await _hotelService.PutHotel(id, hotel);
+        }
     }
 }

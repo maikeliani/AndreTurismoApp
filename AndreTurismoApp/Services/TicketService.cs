@@ -72,6 +72,21 @@ namespace AndreTurismoApp.Services
             }
         }
 
+        public async Task<Ticket> PutTicket(int id, Ticket t)
+        {
+            try
+            {
+                HttpResponseMessage response = await TicketService._httpClient.PutAsJsonAsync("https://localhost:7118/api/Tickets" + $"/{id}", t);
+                response.EnsureSuccessStatusCode();
+                string tickets = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Ticket>(tickets);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
     }
 
    

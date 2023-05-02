@@ -41,5 +41,11 @@ namespace AndreTurismoApp.Controllers
             return await _packageService.Delete(id);
         }
 
+        [HttpPut("{id}")]
+        public async Task<Package> PutHotel(int id, Package package)
+        {
+            return await _packageService.PutPackage(id, package);
+        }
+
     }
 }

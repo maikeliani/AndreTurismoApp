@@ -78,5 +78,20 @@ namespace AndreTurismoApp.Services
                 throw;
             }
         }
+
+        public async Task<Package> PutPackage(int id, Package p)
+        {
+            try
+            {
+                HttpResponseMessage response = await PackageService._httpClient.PutAsJsonAsync("https://localhost:7234/api/Packages" + $"/{id}", p);
+                response.EnsureSuccessStatusCode();
+                string packages = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Package>(packages);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
     }
 }

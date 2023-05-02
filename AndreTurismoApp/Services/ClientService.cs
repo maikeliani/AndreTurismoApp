@@ -80,5 +80,20 @@ namespace AndreTurismoApp.Services
                 throw;
             }
         }
+
+        public async Task<Client> PutClient(int id, Client c)
+        {
+            try
+            {
+                HttpResponseMessage response = await ClientService._httpClient.PutAsJsonAsync("https://localhost:7021/api/Clients" + $"/{id}", c);
+                response.EnsureSuccessStatusCode();
+                string clients = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Client>(clients);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
     }
 }

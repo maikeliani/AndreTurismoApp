@@ -79,5 +79,20 @@ namespace AndreTurismoApp.Services
             }
         }
 
+        public async Task<Hotel> PutHotel(int id, Hotel h)
+        {
+            try
+            {
+                HttpResponseMessage response = await HotelService._httpClient.PutAsJsonAsync("https://localhost:7261/api/Hotels" + $"/{id}", h);
+                response.EnsureSuccessStatusCode();
+                string hotels = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Hotel>(hotels);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
     }
 }
