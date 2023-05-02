@@ -45,7 +45,7 @@ namespace AndreTurismoApp.AddressService.Controllers
               return NotFound();
           }
             
-            //return await _context.Address.ToListAsync(); //testeee
+            
             return await _context.Address.Include(a => a.City).ToListAsync();
         }
 

@@ -32,7 +32,10 @@ namespace AndreTurismoApp.ClientService.Controllers
           {
               return NotFound();
           }
-            return await _context.Client.ToListAsync();
+            return await _context.Client.Include(a => a.Address.City).ToListAsync(); //exibe o endereço completo dos clientes
+            
+
+           
         }
 
         // GET: api/Clients/5
@@ -110,6 +113,9 @@ namespace AndreTurismoApp.ClientService.Controllers
             ad.Complement = data.Complemento;
             ad.ZipCode = data.CEP;
             client.Address = ad;
+
+            _context.Client.Include(a => a.Address); // inserido
+
             //---------------------------- fecha teste
             _context.Client.Add(client);
             await _context.SaveChangesAsync();

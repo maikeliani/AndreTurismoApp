@@ -1,4 +1,5 @@
-﻿using AndreTurismoApp.Models;
+﻿using System.Net;
+using AndreTurismoApp.Models;
 using AndreTurismoApp.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -44,9 +45,15 @@ namespace AndreTurismoApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<City> PutCity(int id, Address address)
+        public async Task<City> PutCity(int id, City c)
         {
-            return await _cityService.PutAddress(id, address);
+            return await _cityService.PutCity(id, c);
         }
+        /*
+                [HttpPut]
+                public async Task<HttpStatusCode> PutCity(City city)
+                {
+                    return await _cityService.PutCity(city);
+                }*/
     }
 }

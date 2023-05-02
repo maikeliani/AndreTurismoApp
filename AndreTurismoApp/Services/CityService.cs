@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using AndreTurismoApp.Models;
@@ -45,6 +46,13 @@ namespace AndreTurismoApp.Services
             }
         }
 
+        //perguntar Professor
+        //public async Task<HttpStatusCode> PostCity(City city)
+        //{
+        //    HttpResponseMessage response = await CityService._httpClient.PostAsJsonAsync("https://localhost:8082/api/Cities", city);
+        //    return response.StatusCode;
+        //}
+
         public async Task<City> GetCity(int id)
         {
             try
@@ -59,6 +67,7 @@ namespace AndreTurismoApp.Services
 
 
                 else
+                   
                     return null;
             }
             catch (HttpRequestException e)
@@ -83,8 +92,8 @@ namespace AndreTurismoApp.Services
             }
         }
 
-
-        public async Task<City> PutAddress(int id, Address c)
+            //perguntar pq precisa passar o id 2 vezes pra dar updat2
+        public async Task<City> PutCity(int id, City c)
         {
             try
             {
@@ -98,5 +107,11 @@ namespace AndreTurismoApp.Services
                 throw;
             }
         }
+        // exemplo codigo naiara -- so nao usou HttpStatusCode nos GET's
+        /* public async Task<HttpStatusCode> PutCity(City city)
+         {
+             HttpResponseMessage response = await CityService._httpClient.PutAsJsonAsync("https://localhost:7278/api/Cities", city);
+             return response.StatusCode;
+         }*/
     }
 }
