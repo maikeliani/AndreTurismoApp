@@ -74,8 +74,24 @@ namespace AndreTurismoApp.Services
                 HttpResponseMessage response = await CityService._httpClient.DeleteAsync("https://localhost:7278/api/Cities" + $"/{id}");
                 response.EnsureSuccessStatusCode();
                 string cities = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<City>(cities); //deleta mas da erro no retorno pois o objeto ja foi deletado
+                return JsonConvert.DeserializeObject<City>(cities); 
 
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+
+        public async Task<City> PutAddress(int id, Address c)
+        {
+            try
+            {
+                HttpResponseMessage response = await CityService._httpClient.PutAsJsonAsync("https://localhost:7278/api/Cities" + $"/{id}", c);
+                response.EnsureSuccessStatusCode();
+                string cities = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<City>(cities);
             }
             catch (HttpRequestException e)
             {

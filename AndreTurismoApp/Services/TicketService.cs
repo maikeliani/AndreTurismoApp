@@ -63,7 +63,7 @@ namespace AndreTurismoApp.Services
                 HttpResponseMessage response = await TicketService._httpClient.DeleteAsync("https://localhost:7118/api/Tickets" + $"/{id}");
                 response.EnsureSuccessStatusCode();
                 string tickets = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Ticket>(tickets); //deleta mas da erro no retorno pois o objeto ja foi deletado
+                return JsonConvert.DeserializeObject<Ticket>(tickets); 
 
             }
             catch (HttpRequestException e)

@@ -70,7 +70,7 @@ namespace AndreTurismoApp.Services
                 HttpResponseMessage response = await HotelService._httpClient.DeleteAsync("https://localhost:7261/api/Hotels" + $"/{id}");
                 response.EnsureSuccessStatusCode();
                 string hotels = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Hotel>(hotels); //deleta mas da erro no retorno pois o objeto ja foi deletado
+                return JsonConvert.DeserializeObject<Hotel>(hotels); 
 
             }
             catch (HttpRequestException e)

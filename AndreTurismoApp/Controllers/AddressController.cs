@@ -36,9 +36,9 @@ namespace AndreTurismoApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<Address> PutAddress(Address c)
+        public async Task<Address> PutAddress(int id, Address address)
         {
-            return await  addressService.PutAddress(c);
+            return await  addressService.PutAddress(id, address);
         }
 
         [HttpDelete("{id}")]

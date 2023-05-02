@@ -72,7 +72,7 @@ namespace AndreTurismoApp.Services
                 HttpResponseMessage response = await ClientService._httpClient.DeleteAsync("https://localhost:7021/api/Clients" + $"/{id}");
                 response.EnsureSuccessStatusCode();
                 string clients = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Client>(clients); //deleta mas da erro no retorno pois o objeto ja foi deletado
+                return JsonConvert.DeserializeObject<Client>(clients); 
 
             }
             catch (HttpRequestException e)

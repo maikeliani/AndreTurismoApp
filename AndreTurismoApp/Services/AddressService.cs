@@ -68,42 +68,42 @@ namespace AndreTurismoApp.Services
             }
         }
 
-        //public async Task<ActionResult> PutAddresses(int id, Address address)
-        //{
-        //    try
-        //    {
-        //        if (id != address.Id)
-        //        {
-        //            throw new HttpResponseException(HttpStatusCode.BadRequest);
-
-        //        }
-        //        HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(address), Encoding.UTF8, "application/JSON");
-
-        //        HttpResponseMessage resposta = await _httpClient.PutAsync("https://localhost:7194/api/Addresses", httpContent);
-        //        resposta.EnsureSuccessStatusCode();
-        //        return null;   //ver retornooo
-        //    }
-        //    catch (HttpRequestException e)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-
-        public async Task<Address> PutAddress(Address c)
+       /* public async Task<Address> PutAddress(int id, Address address)
         {
             try
             {
-                HttpResponseMessage response = await AddressService._httpClient.PutAsJsonAsync("https://localhost:7194/api/Addresses" + $"/{c.Id}", c);
-                response.EnsureSuccessStatusCode();
-                string address = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Address>(address);
+                if (id != address.Id)
+                {
+                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+                }
+                HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(address), Encoding.UTF8, "application/JSON");
+
+                HttpResponseMessage resposta = await _httpClient.PutAsync("https://localhost:7194/api/Addresses" + $"/{id}", httpContent);
+                resposta.EnsureSuccessStatusCode();
+                return address;
             }
             catch (HttpRequestException e)
             {
                 throw;
             }
-        }
+        }*/
+
+
+         public async Task<Address> PutAddress(int id, Address c)
+         {
+             try
+             {
+                 HttpResponseMessage response = await AddressService._httpClient.PutAsJsonAsync("https://localhost:7194/api/Addresses" + $"/{id}", c);
+                 response.EnsureSuccessStatusCode();
+                 string address = await response.Content.ReadAsStringAsync();
+                 return JsonConvert.DeserializeObject<Address>(address);
+             }
+             catch (HttpRequestException e)
+             {
+                 throw;
+             }
+         }
 
         public async Task<Address> Delete(int id)
         {
@@ -112,7 +112,7 @@ namespace AndreTurismoApp.Services
                 HttpResponseMessage response = await AddressService._httpClient.DeleteAsync("https://localhost:7194/api/Addresses" + $"/{id}");
                 response.EnsureSuccessStatusCode();
                 string address = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Address>(address); //deleta mas da erro no retorno pois o objeto ja foi deletado
+                return JsonConvert.DeserializeObject<Address>(address); 
                 
             }
             catch (HttpRequestException e)

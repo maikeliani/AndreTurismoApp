@@ -125,8 +125,8 @@ namespace AndreTurismoApp.AddressService.Controllers
 
             _context.Address.Add(ad);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAddress", new { id = address.Id }, ad); // colocou ad no fim em vez de address
+            
+            return CreatedAtAction("GetAddress", new { id = address.Id }, ad); 
         }
 
         // DELETE: api/Addresses/5

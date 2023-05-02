@@ -43,16 +43,10 @@ namespace AndreTurismoApp.Controllers
             return await _cityService.Delete(id);
         }
 
-        /*  [HttpDelete(Name = "DeleteCity")]
-          public bool Delete(int id)
-          {
-              return cityService.Delete(id);
-          }
-
-          [HttpPut(Name = "UpdateCity")]
-          public bool Update(City city)
-          {
-              return cityService.Update(city);
-          }*/
+        [HttpPut("{id}")]
+        public async Task<City> PutCity(int id, Address address)
+        {
+            return await _cityService.PutAddress(id, address);
+        }
     }
 }

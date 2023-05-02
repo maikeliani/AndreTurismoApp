@@ -70,7 +70,7 @@ namespace AndreTurismoApp.Services
                 HttpResponseMessage response = await PackageService._httpClient.DeleteAsync("https://localhost:7234/api/Packages" + $"/{id}");
                 response.EnsureSuccessStatusCode();
                 string packages = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Package>(packages); //deleta mas da erro no retorno pois o objeto ja foi deletado
+                return JsonConvert.DeserializeObject<Package>(packages); 
 
             }
             catch (HttpRequestException e)
